@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Kindergarten Quiz</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<noscript>This page requires JavaScript to work properly</noscript>
+	<script type="text/javascript">
+		operations = ["+", "*"];
+		function getRandom() {
+			number = Math.ceil(Math.random() * 10);
+			return number;
+		}
+
+		function replay(){
+			first = getRandom();
+			span1Elem = document.getElementById("first_num");
+			span1Elem.innerHTML = first;
+			second = getRandom();
+			span2Elem = document.getElementById("second_num");
+			span2Elem.innerHTML = second;
+			result = document.getElementById("result");
+			result.value = "";
+			display = document.getElementById("output");
+			display.innerHTML = "";
+			operator = document.getElementById("operator");
+			operatorSelector = Math.floor(Math.random() * 2);
+			operator.innerHTML = operations[operatorSelector];
+			
+		}
+
+		function check(){
+			span1Elem = document.getElementById("first_num");
+			value1 = parseInt(span1Elem.innerHTML);
+			span2Elem = document.getElementById("second_num");
+			value2 = parseInt(span2Elem.innerHTML);
+			result = document.getElementById("result");
+			value3 = parseInt(result.value);
+			display = document.getElementById("output");
+			operator = document.getElementById("operator").innerHTML;
+			
+			if(operator == "+" && value3 == (value1 + value2) || operator == "*" && value3 == (value1 + value2) ){				
+				display.innerHTML = "<img src='images/correct.png' /> Great, you entered the correct result.";
+			}
+			else{
+				display.innerHTML = "<img src='images/wrong.png' /> Sorry, you made a mistake. Try again.";
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<section>
+		<h1>Kindergarten Quiz</h1>
+		<p>Add the following two numbers and type the result in the box:</p>
+		<p>
+			<span id="first_num">5</span> <span id="operator">+</span> <span id="second_num">9</span> = 
+			<input type="number" name="result" id="result" />
+		</p>
+		<p id="output">
+		</p>
+		<p>
+			<input type="button" value="Check result" onclick="check();" >
+			<input type="button" value="Play again" onclick="replay();" >
+		</p>
+	</section>
+</body>
+</html>
